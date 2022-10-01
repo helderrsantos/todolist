@@ -2,7 +2,7 @@ import { useFonts } from "@expo-google-fonts/inter";
 import { Inter_400Regular, Inter_700Bold} from '@expo-google-fonts/inter';
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import AppLoading from 'expo-app-loading';
 import { Home } from './screens/Home';
 import React from "react";
@@ -19,10 +19,10 @@ export default function App(){
     }
 
     return(
-        <View>
+        <SafeAreaView style={{backgroundColor:'#0D0D0D'}}>
             <Home/>
-            <StatusBar style="auto" />
-        </View>
+            <StatusBar style='light' />
+        </SafeAreaView>
     )
 }
 
