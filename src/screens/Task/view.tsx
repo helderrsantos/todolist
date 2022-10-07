@@ -1,22 +1,46 @@
 import React from "react";
 import { Background } from "../../components/Background";
+import { useNavigation } from "@react-navigation/native";
+import { InputText } from "../../components/InputText/Index";
+import { ButtonInput } from "../../components/ButtonInput";
+import { useSelector } from "react-redux";
 import {
     Box,
     Clipboard,
-    Container, Counter, CreateTasks, Divider, NoTasks, OpenTaskBox, OpenTaskTitle, TaskTitle,
+    ContactorBox,
+    Container,
+    Counter, 
+    CreateTasks, 
+    Divider, 
+    NoTasks, 
+    OpenTaskBox, 
+    OpenTaskTitle, 
+    TaskField, 
+    TaskTitle,
  } from "./styles";
+import { TaskProps } from "../Home/view";
 
-export function TaskView(){
-    
+export function TaskView({onPress}:TaskProps){
+    const navigation = useNavigation();
+    const count = useSelector(state => state.counter.total);
+
     return(
         <Container>
-            <Background/>       
+            <Background/> 
+            <TaskField>
+                <InputText/>            
+                <ButtonInput
+                    onPress={onPress}
+                />
+            </TaskField>      
             <TaskTitle>
                 <OpenTaskTitle>Em aberto</OpenTaskTitle>
-                <Counter></Counter>
+                <ContactorBox>
+                    <Counter>{count}</Counter>
+                </ContactorBox>
             </TaskTitle>
             <Divider/>
-            <Box>
+            <Box onPress={() => navigation.goBack()}>
                 <OpenTaskBox>
                     <Clipboard source={require('../../assets/Clipboard.png')}></Clipboard>
                 </OpenTaskBox>

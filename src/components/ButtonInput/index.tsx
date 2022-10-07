@@ -1,11 +1,10 @@
 import React from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { ButtonMain } from "./style";
-import { TouchableOpacity } from "react-native";
 
-export function ButtonInput(){
+export function ButtonInput({...props}){
     return(
-        <ButtonMain activeOpacity={0.7}> 
+        <ButtonMain activeOpacity={0.7} {...props}> 
             <Ionicons 
                 name="add-circle-outline" 
                 size={16} 

@@ -33,8 +33,3 @@ export const Rocket = styled.Image`
 
 `;
 
-export const TaskField = styled.View`
- flex-direction: row;
- align-items: inherit;
- margin:-30px 24px 0;
-`;
