@@ -50,10 +50,43 @@ export const Divider = styled.View`
   margin: 0 24px;
 `;
 
-export const Box = styled.TouchableOpacity`
+export const Box = styled.View`
   width: 327px;
   height: 208px;
   margin: 0 24px;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+`;
+
+export const TaskBox = styled.View`
+  width: 327px;
+  height: 64px;
+  border-radius: 8px;
+  border:1px;
+  border-color: ${theme.colors.gray400};
+  background-color: ${theme.colors.gray500};
+  margin: 0 24px;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  padding: 12px;
+`;
+
+export const Tasks = styled.Text`
+  font-size: 14px;
+  font-family: ${theme.fonts.text400};
+  color: ${theme.colors.gray200};
+`;
+
+export const Trash = styled.Image`
+  
+`;
+
+export const TrashBox = styled.TouchableOpacity`
+  width: 24px;
+  height: 24px;
+  background-color: red;
   justify-content: center;
   align-items: center;
 `;
