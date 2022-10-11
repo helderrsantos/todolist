@@ -5,6 +5,13 @@ export const Container = styled.View`
  background-color: ${theme.colors.gray500};
  height: 100%;
 `;
+
+export const TaskField = styled.View`
+ flex-direction: row;
+ align-items: inherit;
+ margin:-30px 24px 0;
+`;
+
 export const TaskTitle = styled.Text`
   font-size: 24px;
   font-family: ${theme.fonts.text700};
@@ -18,7 +25,7 @@ export const TaskBox = styled.View`
   justify-content: space-between;
 `;
 
-export const OpenTask = styled.TouchableOpacity`
+export const OpenTask = styled.View`
  background-color: ${theme.colors.gray500};
  width: 327px;
  height: 97px;
@@ -27,7 +34,7 @@ export const OpenTask = styled.TouchableOpacity`
  flex-direction: row;
 `;
 
-export const TaskCompleted = styled.TouchableOpacity`
+export const TaskCompleted = styled.View`
  background-color: ${theme.colors.gray500};
  width: 327px;
  height: 97px;
@@ -36,10 +43,18 @@ export const TaskCompleted = styled.TouchableOpacity`
  flex-direction: row;
 `;
 
-export const Counter = styled.View`
+export const ContactorBox = styled.View`
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: ${theme.colors.gray400};
   margin: 38px 100px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Counter = styled.Text`
+  font-size: 18px;
+  font-family: ${theme.fonts.text700};
+  color: ${theme.colors.gray200};
 `;

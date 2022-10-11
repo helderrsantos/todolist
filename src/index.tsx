@@ -4,10 +4,10 @@ import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native";
 import AppLoading from 'expo-app-loading';
-import { Home } from './screens/Home';
 import Routes from "./routes";
 import React from "react";
-import { Task } from "./screens/Task";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 
 export default function App(){
@@ -21,10 +21,12 @@ export default function App(){
     }
 
     return(
-        <SafeAreaView style={{backgroundColor:'#0D0D0D'}}>
-            <StatusBar style='light' />
-            <Home />
-        </SafeAreaView>
+        <Provider store={store}>
+            <SafeAreaView style={{backgroundColor:'#0D0D0D', flex:1}}>
+                <StatusBar style='light' />
+                <Routes />
+            </SafeAreaView>
+        </Provider>
     )
 }
 

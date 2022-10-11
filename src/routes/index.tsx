@@ -9,7 +9,7 @@ const { Navigator: NavigatorStack, Screen: StackScreen } = createStackNavigator(
 function Routes(){
     return(
         <NavigationContainer>
-            <NavigatorStack initialRouteName='Home'>
+            <NavigatorStack initialRouteName='Home' screenOptions={{headerShown:false}}>
                 <StackScreen name='Home' component={Home}/>
                 <StackScreen name='Task' component={Task}/>
             </NavigatorStack>
