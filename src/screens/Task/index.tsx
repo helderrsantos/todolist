@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { decrement } from '../../redux/reducers/counter';
 import { TaskView } from './view';
 
 export function Task(){
+    const [tasks, setTasks] = useState('')
     const dispatch = useDispatch();
 
     function handlePressDiminuir(){
@@ -12,6 +13,7 @@ export function Task(){
     return(
         <TaskView
             onPress={handlePressDiminuir}
+            
         />
     )
 }

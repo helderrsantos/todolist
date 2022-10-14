@@ -28,14 +28,14 @@ import {
 
 export function TaskView({onPress}:TaskProps){
     const navigation = useNavigation();
-    const [task, setTask] = useState();
+    const [task, setTask] = useState([]);
     const count = useSelector(state => state.counter.total);
 
     return(
         <Container>
             <Background/> 
             <TaskField>
-                <InputText onChangeText={(text: React.SetStateAction<undefined>)=>setTask(text)} value={task}/>            
+                <InputText onChangeText={(text)=>setTask(text)} value={task}/>            
                 <ButtonInput/>
             </TaskField>      
             <TaskTitle>
@@ -46,7 +46,7 @@ export function TaskView({onPress}:TaskProps){
             </TaskTitle>            
             <TaskBox>
                 <BouncyCheckbox
-                    onPress={(isChecked: boolean) => {false}}
+                    onPress={(_isChecked: boolean) => {false}}
                     size={24}
                     unfillColor='#262626'
                     fillColor='#4EA8DE'
@@ -54,15 +54,15 @@ export function TaskView({onPress}:TaskProps){
                     
                 />
                 <FlatList
-                    data={task}   
+                    data={[task]}   
                     keyExtractor={item => item}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     renderItem={(item)=>(
-                        <Tasks data={item}>{task}</Tasks>
+                        <Tasks data={item}>{[task]}</Tasks>
                     )}             
                 />
-                <TrashBox>
+                <TrashBox onPress={()=> navigation.goBack()}>
                     <Trash theme={{color:'red'}}source={require('../../assets/trash.png')}></Trash>
                 </TrashBox>
             </TaskBox>
