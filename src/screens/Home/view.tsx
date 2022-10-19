@@ -3,8 +3,8 @@ import React from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useSelector } from "react-redux";
 import { Background } from "../../components/Background";
-import { ButtonInput } from "../../components/ButtonInput";
 import { InputText } from "../../components/InputText/Index";
+import { selectTodoList } from "../../redux/reducers/todoSlice";
 import {
     Container,
     TaskTitle,
@@ -16,26 +16,20 @@ import {
     ContactorBox,
  } from "./styles";
 
-export interface TaskProps {
-    onPress:()=> void;
-}
-
-export function HomeView({onPress}:TaskProps){
+export function HomeView(){
     const navigation = useNavigation();
-    const count = useSelector(state => state.counter.total);
+    const todoList = useSelector(selectTodoList)
 
     return(
         <Container>
             <Background/>
             <TaskField>
                 <InputText/>            
-                <ButtonInput onPress={onPress}/>
             </TaskField>
             <TaskTitle>Minhas tarefas</TaskTitle>
             <TaskBox>
-                <OpenTask> 
-                    <BouncyCheckbox
-                        onPress={()=> navigation.navigate('Task')}                        
+                <OpenTask onPress={()=> navigation.navigate('Task')} > 
+                    <BouncyCheckbox                       
                         fillColor='#4EA8DE'
                         unfillColor='#262626'
                         text='Em Aberto' 
@@ -44,10 +38,10 @@ export function HomeView({onPress}:TaskProps){
                         style={{marginLeft:24, marginTop:37,marginRight:24, marginBottom:36}}
                     />
                     <ContactorBox>
-                        <Counter>{count}</Counter>                    
+                        <Counter>{todoList.length}</Counter>                    
                     </ContactorBox>
                 </OpenTask>
-                <TaskCompleted>
+                <TaskCompleted onPress={()=> navigation.navigate('TaskCompleted')}>
                     <BouncyCheckbox
                         fillColor='#5E60CE'
                         unfillColor='#262626'
@@ -57,7 +51,7 @@ export function HomeView({onPress}:TaskProps){
                         style={{marginLeft:24, marginTop:37,marginRight:18, marginBottom:36}}
                     />
                     <ContactorBox>
-                        <Counter>{count}</Counter>                    
+                        <Counter>{todoList.length}</Counter>                    
                     </ContactorBox>
                 </TaskCompleted>
             </TaskBox>           

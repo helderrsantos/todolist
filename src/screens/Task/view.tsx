@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Background } from "../../components/Background";
-import { useNavigation } from "@react-navigation/native";
 import { InputText } from "../../components/InputText/Index";
-import { ButtonInput } from "../../components/ButtonInput";
+import { TaskBox } from "../../components/TaskBox";
 import { useSelector } from "react-redux";
-import { TaskProps } from "../Home/view";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { FlatList } from "react-native-gesture-handler";
+import { selectTodoList} from "../../redux/reducers/todoSlice"
+
 import {
     Box,
     Clipboard,
@@ -18,54 +16,37 @@ import {
     NoTasks, 
     OpenTaskBox, 
     OpenTaskTitle, 
-    TaskBox, 
-    TaskField, 
-    Tasks, 
+    TaskField,
     TaskTitle,
-    Trash,
-    TrashBox,
  } from "./styles";
 
-export function TaskView({onPress}:TaskProps){
-    const navigation = useNavigation();
-    const [task, setTask] = useState([]);
-    const count = useSelector(state => state.counter.total);
+export function TaskView(){
+    const todoList = useSelector(selectTodoList)
 
     return(
         <Container>
             <Background/> 
             <TaskField>
-                <InputText onChangeText={(text)=>setTask(text)} value={task}/>            
-                <ButtonInput/>
+                <InputText/>            
             </TaskField>      
             <TaskTitle>
                 <OpenTaskTitle>Em aberto</OpenTaskTitle>
                 <ContactorBox>
-                    <Counter>{count}</Counter>
+                    <Counter>{todoList.length}</Counter>
                 </ContactorBox>
-            </TaskTitle>            
-            <TaskBox>
-                <BouncyCheckbox
-                    onPress={(_isChecked: boolean) => {false}}
-                    size={24}
-                    unfillColor='#262626'
-                    fillColor='#4EA8DE'
-                    textStyle={{ fontFamily: 'Inter_400Regular', color:'#F2F2F2', fontSize:14}}
-                    
-                />
-                <FlatList
-                    data={[task]}   
-                    keyExtractor={item => item}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={(item)=>(
-                        <Tasks data={item}>{[task]}</Tasks>
-                    )}             
-                />
-                <TrashBox onPress={()=> navigation.goBack()}>
-                    <Trash theme={{color:'red'}}source={require('../../assets/trash.png')}></Trash>
-                </TrashBox>
-            </TaskBox>
+            </TaskTitle> 
+            <Box>           
+            { 
+                todoList.map((item: { item: string; done: boolean; id: number; })=> 
+                    <TaskBox
+                        name={item.item}
+                        done={item.done}
+                        id={item.id}
+                    /> )
+            }
+            </Box>
+            
+                
             {/*<Divider/>
             <Box>
                 <OpenTaskBox>
