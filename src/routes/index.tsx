@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Home } from '../screens/Home';
 import { Task } from '../screens/Task';
+import { TaskCompleted } from '../screens/Task Completed';
 
 const { Navigator: NavigatorStack, Screen: StackScreen } = createStackNavigator();
 
@@ -12,6 +13,7 @@ function Routes(){
             <NavigatorStack initialRouteName='Home' screenOptions={{headerShown:false}}>
                 <StackScreen name='Home' component={Home}/>
                 <StackScreen name='Task' component={Task}/>
+                <StackScreen name='TaskCompleted' component={TaskCompleted}/>
             </NavigatorStack>
         </NavigationContainer>
     )

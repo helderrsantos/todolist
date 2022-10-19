@@ -1,26 +1,22 @@
 import React from "react";
 import { Background } from "../../components/Background";
 import { InputText } from "../../components/InputText/Index";
-import { TaskBox } from "../../components/TaskBox";
+import { TaskBoxCompleted } from "../../components/TaskBoxCompleted";
 import { useSelector } from "react-redux";
 import { selectTodoList} from "../../redux/reducers/todoSlice"
 
 import {
     Box,
-    Clipboard,
     ContactorBox,
     Container,
     Counter, 
-    CreateTasks, 
     Divider, 
-    NoTasks, 
-    OpenTaskBox, 
     OpenTaskTitle, 
     TaskField,
     TaskTitle,
  } from "./styles";
 
-export function TaskView(){
+export function TaskCompletedView(){
     const todoList = useSelector(selectTodoList)
 
     return(
@@ -30,7 +26,7 @@ export function TaskView(){
                 <InputText/>            
             </TaskField>      
             <TaskTitle>
-                <OpenTaskTitle>Em aberto</OpenTaskTitle>
+                <OpenTaskTitle>Concluídas</OpenTaskTitle>
                 <ContactorBox>
                     <Counter>{todoList.length}</Counter>
                 </ContactorBox>
@@ -38,7 +34,7 @@ export function TaskView(){
             <Box>           
             { 
                 todoList.map((item: { item: string; done: boolean; id: number; })=> 
-                    <TaskBox
+                    <TaskBoxCompleted 
                         name={item.item}
                         done={item.done}
                         id={item.id}

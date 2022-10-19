@@ -23,7 +23,7 @@ export const TaskTitle = styled.View`
 export const OpenTaskTitle = styled.Text`
   font-size: 14px;
   font-family: ${theme.fonts.text700};
-  color: ${theme.colors.blue};
+  color: ${theme.colors.purpledark};
 `;
 
 export const ContactorBox = styled.View`
@@ -58,22 +58,6 @@ export const Box = styled.View`
   flex: 1;
 `;
 
-export const OpenTaskBox = styled.View`
-  margin-bottom: 16px;
-`;
 
-export const Clipboard = styled.Image`
-
-`;
-
-export const NoTasks = styled.Text`
-  color: ${theme.colors.gray300};
-  font-family: ${theme.fonts.text700};
-`;
-
-export const CreateTasks = styled.Text`
-  color: ${theme.colors.gray300};
-  font-family: ${theme.fonts.text400};
-`;
 
 
