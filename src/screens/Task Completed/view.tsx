@@ -7,10 +7,14 @@ import { selectTodoList} from "../../redux/reducers/todoSlice"
 
 import {
     Box,
+    Clipboard,
     ContactorBox,
     Container,
     Counter, 
+    CreateTasks, 
     Divider, 
+    NoTasks, 
+    OpenTaskBox, 
     OpenTaskTitle, 
     TaskField,
     TaskTitle,
@@ -31,26 +35,26 @@ export function TaskCompletedView(){
                     <Counter>{todoList.length}</Counter>
                 </ContactorBox>
             </TaskTitle> 
-            <Box>           
-            { 
-                todoList.map((item: { item: string; done: boolean; id: number; })=> 
-                    <TaskBoxCompleted 
-                        name={item.item}
-                        done={item.done}
-                        id={item.id}
-                    /> )
-            }
-            </Box>
-            
-                
-            {/*<Divider/>
+            {todoList.length === 0 
+            ?
             <Box>
+            <Divider/>
                 <OpenTaskBox>
                     <Clipboard source={require('../../assets/Clipboard.png')}></Clipboard>
                 </OpenTaskBox>
-                <NoTasks>Você ainda não tem tarefas cadastradas</NoTasks>
-                <CreateTasks>Crie tarefas e organize seus itens a fazer{tasks}</CreateTasks>
-            </Box>*/}
+                <NoTasks>Você ainda não tem tarefas concluídas</NoTasks>
+                <CreateTasks>Crie e conclua suas tarefas</CreateTasks>
+            </Box>
+            :
+            <Box>           
+            { 
+                todoList.map((item: { item: string; id: number; })=> 
+                    <TaskBoxCompleted 
+                        name={item.item}
+                        id={item.id}
+                    /> )
+            }
+            </Box>}
         </Container>
     )
 }

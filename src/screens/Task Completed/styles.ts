@@ -58,6 +58,25 @@ export const Box = styled.View`
   flex: 1;
 `;
 
+export const OpenTaskBox = styled.View`
+  margin-bottom: 16px;
+  margin-top:48px;
+`;
+
+export const Clipboard = styled.Image`
+
+`;
+
+export const NoTasks = styled.Text`
+  color: ${theme.colors.gray300};
+  font-family: ${theme.fonts.text700};
+`;
+
+export const CreateTasks = styled.Text`
+  color: ${theme.colors.gray300};
+  font-family: ${theme.fonts.text400};
+`;
+
 
 
 

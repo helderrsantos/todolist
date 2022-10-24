@@ -35,26 +35,27 @@ export function TaskView(){
                     <Counter>{todoList.length}</Counter>
                 </ContactorBox>
             </TaskTitle> 
-            <Box>           
-            { 
-                todoList.map((item: { item: string; done: boolean; id: number; })=> 
-                    <TaskBox
-                        name={item.item}
-                        done={item.done}
-                        id={item.id}
-                    /> )
-            }
-            </Box>
-            
-                
-            {/*<Divider/>
+
+						{todoList.length === 0 
+						? (      
             <Box>
+            <Divider/>
                 <OpenTaskBox>
                     <Clipboard source={require('../../assets/Clipboard.png')}></Clipboard>
                 </OpenTaskBox>
                 <NoTasks>Você ainda não tem tarefas cadastradas</NoTasks>
-                <CreateTasks>Crie tarefas e organize seus itens a fazer{tasks}</CreateTasks>
-            </Box>*/}
+                <CreateTasks>Crie tarefas e organize seus itens a fazer</CreateTasks>
+            </Box> ) 
+						: ( 
+            <Box>           
+            {todoList.map((item: { item: string; done: boolean; id: number})=> 
+              	<TaskBox
+              	    name={item.item}
+              	    done={item.done}
+										id={item.id}
+              	/> )
+						}
+            </Box>)}
         </Container>
     )
 }
