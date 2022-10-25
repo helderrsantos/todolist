@@ -28,7 +28,7 @@ export function HomeView(){
             </TaskField>
             <TaskTitle>Minhas tarefas</TaskTitle>
             <TaskBox>
-                <OpenTask onPress={()=> navigation.navigate('Task')} > 
+                <OpenTask> 
                     <BouncyCheckbox                       
                         fillColor='#4EA8DE'
                         unfillColor='#262626'
@@ -36,12 +36,13 @@ export function HomeView(){
                         size={24}
                         textStyle={{ fontFamily: 'Inter_700Bold', color:'#4EA8DE', textDecorationLine:'none'}}
                         style={{marginLeft:24, marginTop:37,marginRight:24, marginBottom:36}}
+                        onPress={(isChecked: boolean) => {isChecked ? navigation.navigate('Task') : false}}
                     />
                     <ContactorBox>
                         <Counter>{todoList.length}</Counter>                    
                     </ContactorBox>
                 </OpenTask>
-                <TaskCompleted onPress={()=> navigation.navigate('TaskCompleted')}>
+                <TaskCompleted>
                     <BouncyCheckbox
                         fillColor='#5E60CE'
                         unfillColor='#262626'
@@ -49,6 +50,7 @@ export function HomeView(){
                         size={24}
                         textStyle={{ fontFamily: 'Inter_700Bold', color:'#5E60CE', textDecorationLine:'none'}}
                         style={{marginLeft:24, marginTop:37,marginRight:18, marginBottom:36}}
+                        onPress={(isChecked: boolean) => {isChecked ? navigation.navigate('TaskCompleted') : false}}
                     />
                     <ContactorBox>
                         <Counter>{todoList.length}</Counter>                    

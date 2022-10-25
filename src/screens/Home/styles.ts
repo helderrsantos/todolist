@@ -25,7 +25,7 @@ export const TaskBox = styled.View`
   justify-content: space-between;
 `;
 
-export const OpenTask = styled.TouchableOpacity`
+export const OpenTask = styled.View`
  background-color: ${theme.colors.gray500};
  width: 327px;
  height: 97px;
@@ -34,7 +34,7 @@ export const OpenTask = styled.TouchableOpacity`
  flex-direction: row;
 `;
 
-export const TaskCompleted = styled.TouchableOpacity`
+export const TaskCompleted = styled.View`
  background-color: ${theme.colors.gray500};
  width: 327px;
  height: 97px;

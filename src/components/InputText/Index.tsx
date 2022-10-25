@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Alert, Keyboard } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { Input, ButtonMain } from "./style";
 
@@ -9,8 +10,9 @@ export function InputText({...props}){
     const [tasks, setTasks] = useState('');
     const dispatch = useDispatch();
     const addTodo = () =>{
-
-        dispatch(saveTodo({
+        tasks === '' 
+        ? Alert.alert('Crie uma tarefa') 
+        : dispatch(saveTodo({
             item: tasks,
             done: false,
             id: Date.now()
