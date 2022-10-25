@@ -26,7 +26,6 @@ export const TrashBox = styled.TouchableOpacity`
 `;
 
 export const Tasks = styled.Text`
-  color: white;
   font-size: 14px;
   font-family: ${theme.fonts.text400};
   color: ${theme.colors.gray200};

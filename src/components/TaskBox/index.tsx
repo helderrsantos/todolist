@@ -25,8 +25,10 @@ export function TaskBox({ name, id, done}: TaskBoxProps){
                 unfillColor='#262626'
                 size={24}
                 textStyle={{ fontFamily: 'Inter_400Regular', color:'#4EA8DE'}}
-                onPress={(isChecked: boolean) => {isChecked === true ? navigation.navigate('TaskCompleted') : false}}
-                text={<Tasks>{name}</Tasks>}
+                onPress={(isChecked: boolean) => {isChecked ? navigation.navigate('TaskCompleted') : false}}
+                text={
+                    <Tasks>{name}</Tasks>
+                }
             />   
             <TrashBox onPress={remove}>
                 <Trash source={require('../../assets/trash.png')}/>
