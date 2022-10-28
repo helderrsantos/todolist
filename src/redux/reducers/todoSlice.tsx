@@ -1,25 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-  todoList:[]
+export interface ITask {
+  id: string;
+  nome: string;
+  done: boolean;
 }
+
+interface ITodoReducer {
+  todoList: ITask[];
+}
+
+const initialState: ITodoReducer = {
+  todoList: [],
+};
 
 const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    saveTodo:(state, action) => {
-      state.todoList.push(action.payload)
+    saveTodo: (state, action: PayloadAction<ITask>) => {
+      state.todoList.push(action.payload);
     },
-    reset:(state,action)=>{
-      const { id } = action.payload;
-      state.todoList = state.todoList.filter(item => item.id !== id)
-    }
-  }
+    markTaskAsDone: (state, action: PayloadAction<ITask>) => {
+      const tasks = state.todoList.map(task => {
+        if (task.id === action.payload.id) {
+          return { ...task, done: !task.done };
+        }
+        return { ...task };
+      });
+
+      state.todoList = tasks;
+    },
+    reset: (state, action: PayloadAction<ITask>) => {
+      state.todoList = state.todoList.filter(
+        item => item.id !== action.payload.id,
+      );
+    },
+  },
 });
 
-export const { saveTodo, reset } = todoSlice.actions
+export const { saveTodo, markTaskAsDone, reset } = todoSlice.actions;
 
-export const selectTodoList = (state: { todos: { todoList: any; }; }) => state.todos.todoList
-
-export default todoSlice.reducer
+export default todoSlice.reducer;
