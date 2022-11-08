@@ -1,60 +1,67 @@
-import React from "react";
-import { Background } from "../../components/Background";
-import { InputText } from "../../components/InputText/Index";
-import { TaskBoxCompleted } from "../../components/TaskBoxCompleted";
-import { useSelector } from "react-redux";
-import { selectTodoList} from "../../redux/reducers/todoSlice"
+import React from 'react';
 
+import { Background } from '../../components/Background';
+import { ButtonInput } from '../../components/ButtonInput';
+import { InputText } from '../../components/InputText/Index';
+import { TaskBoxCompleted } from '../../components/TaskBoxCompleted';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import {
-    Box,
-    Clipboard,
-    ContactorBox,
-    Container,
-    Counter, 
-    CreateTasks, 
-    Divider, 
-    NoTasks, 
-    OpenTaskBox, 
-    OpenTaskTitle, 
-    TaskField,
-    TaskTitle,
- } from "./styles";
+  Box,
+  Clipboard,
+  ContactorBox,
+  Container,
+  Counter,
+  CreateTasks,
+  Divider,
+  NoTasks,
+  OpenTaskBox,
+  OpenTaskTitle,
+  TaskField,
+  TaskTitle,
+} from './styles';
 
-export function TaskCompletedView(){
-    const todoList = useSelector(selectTodoList)
+export interface TaskBoxCompletedProps {
+  value: string;
+  addTodoCompleted: () => void;
+  onPressTasksCompleted: () => void;
+}
 
-    return(
-        <Container>
-            <Background/> 
-            <TaskField>
-                <InputText/>            
-            </TaskField>      
-            <TaskTitle>
-                <OpenTaskTitle>Concluídas</OpenTaskTitle>
-                <ContactorBox>
-                    <Counter>{todoList.length}</Counter>
-                </ContactorBox>
-            </TaskTitle> 
-            {todoList.length === 0 
-            ?
-            <Box>
-            <Divider/>
-                <OpenTaskBox>
-                    <Clipboard source={require('../../assets/Clipboard.png')}></Clipboard>
-                </OpenTaskBox>
-                <NoTasks>Você ainda não tem tarefas concluídas</NoTasks>
-                <CreateTasks>Crie e conclua suas tarefas</CreateTasks>
-            </Box>
-            :
-            <Box>           
-            { 
-                todoList.map((item: { item: string; id: number; })=> 
-                    <TaskBoxCompleted 
-                        name={item.item}
-                        id={item.id}
-                    /> )
-            }
-            </Box>}
-        </Container>
-    )
+export function TaskCompletedView({
+  value,
+  onPressTasksCompleted,
+  addTodoCompleted,
+}: TaskBoxCompletedProps) {
+  const todoList = useAppSelector(state => state.todos.todoList);
+
+  return (
+    <Container>
+      <Background />
+      <TaskField>
+        <InputText value={value} onChangeText={onPressTasksCompleted} />
+        <ButtonInput onPress={addTodoCompleted} />
+      </TaskField>
+      <TaskTitle>
+        <OpenTaskTitle>Concluídas</OpenTaskTitle>
+        <ContactorBox>
+          <Counter>{todoList.length}</Counter>
+        </ContactorBox>
+      </TaskTitle>
+      {todoList.length === 0 ? (
+        <Box>
+          <Divider />
+          <OpenTaskBox>
+            <Clipboard source={require('../../assets/Clipboard.png')} />
+          </OpenTaskBox>
+          <NoTasks>Você ainda não tem tarefas concluídas</NoTasks>
+          <CreateTasks>Crie e conclua suas tarefas</CreateTasks>
+        </Box>
+      ) : (
+        <Box>
+          {todoList.map((item: { item: string; id: string; done: boolean }) => (
+            <TaskBoxCompleted name={item.item} id={item.id} done={item.done} />
+          ))}
+        </Box>
+      )}
+    </Container>
+  );
 }

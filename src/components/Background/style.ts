@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+
 import { theme } from '../../global/styles/theme';
 
 export const Main = styled.View`
- background-color: ${theme.colors.gray500};
+  background-color: ${theme.colors.gray600};
 `;
 
 export const HeaderMain = styled.View`
@@ -14,22 +15,19 @@ export const HeaderMain = styled.View`
 `;
 
 export const Header = styled.Text`
- font-family:${theme.fonts.text700}; 
+  font-family: ${theme.fonts.text700};
 `;
 
 export const Title = styled.Text`
- color: ${theme.colors.blue};
- font-family:${theme.fonts.text700};
- font-size: 38px;
+  color: ${theme.colors.blue};
+  font-family: ${theme.fonts.text700};
+  font-size: 38px;
 `;
 
 export const TitleDo = styled.Text`
- color: ${theme.colors.purpledark};
- font-family:${theme.fonts.text700};
- font-size: 38px;
+  color: ${theme.colors.purpledark};
+  font-family: ${theme.fonts.text700};
+  font-size: 38px;
 `;
 
-export const Rocket = styled.Image`
-
-`;
-
+export const Rocket = styled.Image``;

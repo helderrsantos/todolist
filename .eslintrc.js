@@ -8,6 +8,12 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
         '@typescript-eslint/no-shadow': ['error'],
         'import/no-duplicates': ['error', { considerQueryString: true }],
         'no-shadow': 'off',

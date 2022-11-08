@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 export interface ITask {
+  key: string;
+  item: string;
   id: string;
-  nome: string;
+  name: string;
   done: boolean;
 }
-
 interface ITodoReducer {
   todoList: ITask[];
 }
