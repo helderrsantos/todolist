@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import { theme } from '../../global/styles/theme';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   background-color: ${theme.colors.gray600};
   height: 100%;
 `;
@@ -15,7 +15,7 @@ export const TaskField = styled.View`
 
 export const TaskTitle = styled.View`
   height: 24px;
-  width: 327px;
+  width: 100%;
   margin: 32px 24px 20px;
   flex-direction: row;
   align-items: center;
@@ -28,7 +28,6 @@ export const OpenTaskTitle = styled.Text`
 `;
 
 export const ContactorBox = styled.View`
-  width: 24px;
   height: 19px;
   border-radius: 50%;
   padding: 2px 8px;
@@ -47,13 +46,12 @@ export const Counter = styled.Text`
 export const Divider = styled.View`
   border: solid;
   border-color: ${theme.colors.gray400};
-  width: 327px;
+  width: 100%;
   height: 0.5px;
-  margin: 0 24px;
 `;
 
-export const Box = styled.View`
-  width: 327px;
+export const TaskWrapper = styled.View`
+  flex: 1;
   margin: 0 24px;
   align-items: center;
   background-color: ${theme.colors.gray600};

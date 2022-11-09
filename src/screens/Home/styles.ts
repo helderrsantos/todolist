@@ -1,3 +1,4 @@
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import styled from 'styled-components/native';
 
 import { theme } from '../../global/styles/theme';
@@ -26,31 +27,23 @@ export const TaskBox = styled.View`
   justify-content: space-between;
 `;
 
-export const OpenTask = styled.View`
+export const ButtonWrapper = styled.TouchableOpacity`
   background-color: ${theme.colors.gray500};
-  width: 327px;
+  width: 100%;
   height: 97px;
   border-radius: 6px;
   border: 1px;
   flex-direction: row;
-`;
-
-export const TaskCompleted = styled.View`
-  background-color: ${theme.colors.gray500};
-  width: 327px;
-  height: 97px;
-  border-radius: 6px;
-  border: 1px;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 `;
 
 export const ContactorBox = styled.View`
-  width: 26px;
-  height: 21px;
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 15px 0;
-  background-color: ${theme.colors.gray400};
-  margin: 38px 100px;
+  // background-color: ${theme.colors.gray400};
+  // background-color: ({theme}) => ${theme.colors.gray400};
   align-items: center;
   justify-content: center;
 `;
@@ -59,4 +52,18 @@ export const Counter = styled.Text`
   font-size: 14px;
   font-family: ${theme.fonts.text700};
   color: ${theme.colors.gray200};
+`;
+
+export const Checkbox = styled(BouncyCheckbox).attrs(({ isChecked }) => ({
+  fillColor: isChecked ? '#5E60CE' : '#4EA8DE',
+  unfillColor: '#262626',
+  textStyle: {
+    fontFamily: 'Inter_700Bold',
+    color: isChecked ? '#5E60CE' : '#4EA8DE',
+    width: '100%',
+    textDecorationLine: 'none',
+  },
+}))`
+  flex: 1;
+  width: 100%;
 `;

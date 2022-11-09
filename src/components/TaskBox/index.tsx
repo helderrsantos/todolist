@@ -1,19 +1,21 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import BouncyCheckbox, {
+  IBouncyCheckboxProps,
+} from 'react-native-bouncy-checkbox';
 import { useDispatch } from 'react-redux';
 
 import { reset } from '../../redux/reducers/todoSlice';
 import { Box, Tasks, Trash, TrashBox } from './style';
 
-export interface TaskBoxProps {
+export interface TaskBoxProps extends IBouncyCheckboxProps {
   name: string;
   done: boolean;
   id: string;
 }
 
-export function TaskBox({ name, id }: TaskBoxProps) {
+export function TaskBox({ name, id, ...props }: TaskBoxProps) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const remove = () => {
@@ -31,13 +33,11 @@ export function TaskBox({ name, id }: TaskBoxProps) {
   return (
     <Box>
       <BouncyCheckbox
+        {...props}
         fillColor="#4EA8DE"
         unfillColor="#262626"
         size={24}
         textStyle={{ fontFamily: 'Inter_400Regular', color: '#4EA8DE' }}
-        onPress={(done: boolean) => {
-          done ? navigation.navigate('TaskCompleted') : false;
-        }}
         text={<Tasks>{name}</Tasks>}
       />
       <TrashBox onPress={remove}>

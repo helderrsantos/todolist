@@ -1,12 +1,13 @@
 import React from 'react';
 
+import { FlatList } from 'react-native-gesture-handler';
+
 import { Background } from '../../components/Background';
 import { ButtonInput } from '../../components/ButtonInput';
 import { InputText } from '../../components/InputText/Index';
 import { TaskBox } from '../../components/TaskBox';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { ITask } from '../../redux/reducers/todoSlice';
 import {
-  Box,
   Clipboard,
   ContactorBox,
   Container,
@@ -18,48 +19,67 @@ import {
   OpenTaskTitle,
   TaskField,
   TaskTitle,
+  TaskWrapper,
 } from './styles';
 export interface TaskBoxProps {
-  value: string;
+  task: string;
+  setTask: (text: string) => void;
+  data: ITask[];
   addTodo: () => void;
-  onPressTasks: () => void;
+  onPressTask: (item: ITask) => void;
 }
 
-export function TaskView({ value, addTodo, onPressTasks }: TaskBoxProps) {
-  const todoList = useAppSelector(state => state.todos.todoList);
-
+export function TaskView({
+  task,
+  setTask,
+  addTodo,
+  onPressTask,
+  data,
+}: TaskBoxProps) {
   return (
     <Container>
       <Background />
       <TaskField>
-        <InputText value={value} onChangeText={onPressTasks} />
+        <InputText value={task} onChangeText={setTask} />
         <ButtonInput onPress={addTodo} />
       </TaskField>
-      <TaskTitle>
-        <OpenTaskTitle>Em aberto</OpenTaskTitle>
-        <ContactorBox>
-          <Counter>{todoList.length}</Counter>
-        </ContactorBox>
-      </TaskTitle>
 
-      {todoList.length === 0 ? (
-        <Box>
-          <Divider />
-          <OpenTaskBox>
-            <Clipboard
-              source={require('../../assets/Clipboard.png')}
-            ></Clipboard>
-          </OpenTaskBox>
-          <NoTasks>Você ainda não tem tarefas cadastradas</NoTasks>
-          <CreateTasks>Crie tarefas e organize seus itens a fazer</CreateTasks>
-        </Box>
-      ) : (
-        <Box>
-          {todoList.map(item => (
-            <TaskBox name={item.item} done={item.done} id={item.id} />
-          ))}
-        </Box>
-      )}
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => {
+          return (
+            <TaskWrapper>
+              <TaskBox
+                onPress={() => onPressTask(item)}
+                name={item.item}
+                done={item.done}
+                id={item.id}
+              />
+            </TaskWrapper>
+          );
+        }}
+        ListEmptyComponent={
+          <TaskWrapper>
+            <Divider />
+            <OpenTaskBox>
+              <Clipboard source={require('../../assets/Clipboard.png')} />
+            </OpenTaskBox>
+            <NoTasks>Você ainda não tem tarefas cadastradas</NoTasks>
+            <CreateTasks>
+              Crie tarefas e organize seus itens a fazer
+            </CreateTasks>
+          </TaskWrapper>
+        }
+        ListHeaderComponent={
+          <TaskTitle>
+            <OpenTaskTitle>Em aberto</OpenTaskTitle>
+            <ContactorBox>
+              <Counter>{data.length}</Counter>
+            </ContactorBox>
+          </TaskTitle>
+        }
+      />
     </Container>
   );
 }

@@ -10,12 +10,12 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   Container,
   TaskTitle,
-  OpenTask,
+  ButtonWrapper,
   TaskBox,
-  TaskCompleted,
   Counter,
   TaskField,
   ContactorBox,
+  Checkbox,
 } from './styles';
 export interface TaskBoxProps {
   value: string;
@@ -36,56 +36,26 @@ export function HomeView({ addTodo, value, onPressTasks }: TaskBoxProps) {
       </TaskField>
       <TaskTitle>Minhas tarefas</TaskTitle>
       <TaskBox>
-        <OpenTask>
-          <BouncyCheckbox
-            fillColor="#4EA8DE"
-            unfillColor="#262626"
-            text="Em Aberto"
-            size={24}
-            textStyle={{
-              fontFamily: 'Inter_700Bold',
-              color: '#4EA8DE',
-              textDecorationLine: 'none',
-            }}
-            style={{
-              marginLeft: 24,
-              marginTop: 37,
-              marginRight: 24,
-              marginBottom: 36,
-            }}
-            onPress={(isChecked: boolean) => {
-              isChecked ? navigation.navigate('Task') : false;
-            }}
-          />
+        <ButtonWrapper
+          onPress={() => {
+            navigation.navigate('Task', { done: false });
+          }}
+        >
+          <Checkbox text="Em Aberto" disabled />
           <ContactorBox>
-            <Counter>{todoList.length}</Counter>
+            <Counter>{todoList.filter(item => !item.done).length}</Counter>
           </ContactorBox>
-        </OpenTask>
-        <TaskCompleted>
-          <BouncyCheckbox
-            fillColor="#5E60CE"
-            unfillColor="#262626"
-            text="Concluídas"
-            size={24}
-            textStyle={{
-              fontFamily: 'Inter_700Bold',
-              color: '#5E60CE',
-              textDecorationLine: 'none',
-            }}
-            style={{
-              marginLeft: 24,
-              marginTop: 37,
-              marginRight: 18,
-              marginBottom: 36,
-            }}
-            onPress={(isChecked: boolean) => {
-              isChecked ? navigation.navigate('TaskCompleted') : false;
-            }}
-          />
+        </ButtonWrapper>
+        <ButtonWrapper
+          onPress={() => {
+            navigation.navigate('Task', { done: true });
+          }}
+        >
+          <Checkbox text="Concluídas" isChecked disabled />
           <ContactorBox>
-            <Counter>{todoList.length}</Counter>
+            <Counter>{todoList.filter(item => item.done).length}</Counter>
           </ContactorBox>
-        </TaskCompleted>
+        </ButtonWrapper>
       </TaskBox>
     </Container>
   );
