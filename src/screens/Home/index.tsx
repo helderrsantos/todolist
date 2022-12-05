@@ -7,19 +7,19 @@ import { saveTodo } from '../../redux/reducers/todoSlice';
 import { HomeView } from './view';
 
 export function Home() {
-  const [tasks, setTasks] = useState('');
+  const [task, setTask] = useState('');
   const dispatch = useDispatch();
 
   const addTodo = () => {
-    !tasks
+    !task
       ? Alert.alert('Crie uma tarefa')
       : dispatch(
           saveTodo({
-            item: tasks,
+            item: task,
             done: false,
             id: Date.now().toString(),
             key: '',
-            name: '',
+            name: task,
           }),
         );
   };
@@ -27,8 +27,8 @@ export function Home() {
   return (
     <HomeView
       addTodo={addTodo}
-      value={tasks}
-      onPressTasks={(text: React.SetStateAction<void>) => setTasks(text)}
+      value={task}
+      onPressTasks={(text: React.SetStateAction<void>) => setTask(text)}
     />
   );
 }

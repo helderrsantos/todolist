@@ -31,7 +31,7 @@ const todoSlice = createSlice({
 
       state.todoList = tasks;
     },
-    reset: (state, action: PayloadAction<ITask>) => {
+    remove: (state, action: PayloadAction<ITask>) => {
       state.todoList = state.todoList.filter(
         item => item.id !== action.payload.id,
       );
@@ -39,6 +39,6 @@ const todoSlice = createSlice({
   },
 });
 
-export const { saveTodo, markTaskAsDone, reset } = todoSlice.actions;
+export const { saveTodo, markTaskAsDone, remove } = todoSlice.actions;
 
 export default todoSlice.reducer;

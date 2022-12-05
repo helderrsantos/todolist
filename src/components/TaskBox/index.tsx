@@ -1,24 +1,22 @@
 import React from 'react';
 
-import { useNavigation } from '@react-navigation/native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { IBouncyCheckboxProps } from 'react-native-bouncy-checkbox';
 import { useDispatch } from 'react-redux';
 
-import { reset } from '../../redux/reducers/todoSlice';
-import { Box, Tasks, Trash, TrashBox } from './style';
+import { remove } from '../../redux/reducers/todoSlice';
+import { Box, CheckBoxTask, Trash, TrashBox } from './style';
 
-export interface TaskBoxProps {
+export interface TaskBoxProps extends IBouncyCheckboxProps {
   name: string;
   done: boolean;
   id: string;
 }
 
-export function TaskBox({ name, id }: TaskBoxProps) {
+export function TaskBox({ name, id, done, ...props }: TaskBoxProps) {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const remove = () => {
+  const trashCan = () => {
     dispatch(
-      reset({
+      remove({
         id: id,
         item: '',
         name: '',
@@ -30,17 +28,8 @@ export function TaskBox({ name, id }: TaskBoxProps) {
 
   return (
     <Box>
-      <BouncyCheckbox
-        fillColor="#4EA8DE"
-        unfillColor="#262626"
-        size={24}
-        textStyle={{ fontFamily: 'Inter_400Regular', color: '#4EA8DE' }}
-        onPress={(done: boolean) => {
-          done ? navigation.navigate('TaskCompleted') : false;
-        }}
-        text={<Tasks>{name}</Tasks>}
-      />
-      <TrashBox onPress={remove}>
+      <CheckBoxTask {...props} text={name} isChecked={done} />
+      <TrashBox onPress={trashCan}>
         <Trash source={require('../../assets/trash.png')} />
       </TrashBox>
     </Box>

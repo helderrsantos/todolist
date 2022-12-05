@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 import { Background } from '../../components/Background';
 import { ButtonInput } from '../../components/ButtonInput';
@@ -10,12 +9,12 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   Container,
   TaskTitle,
-  OpenTask,
   TaskBox,
-  TaskCompleted,
   Counter,
   TaskField,
   ContactorBox,
+  ButtonWrapper,
+  CheckBox,
 } from './styles';
 export interface TaskBoxProps {
   value: string;
@@ -24,7 +23,7 @@ export interface TaskBoxProps {
 }
 
 export function HomeView({ addTodo, value, onPressTasks }: TaskBoxProps) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const todoList = useAppSelector(state => state.todos.todoList);
 
   return (
@@ -36,56 +35,26 @@ export function HomeView({ addTodo, value, onPressTasks }: TaskBoxProps) {
       </TaskField>
       <TaskTitle>Minhas tarefas</TaskTitle>
       <TaskBox>
-        <OpenTask>
-          <BouncyCheckbox
-            fillColor="#4EA8DE"
-            unfillColor="#262626"
-            text="Em Aberto"
-            size={24}
-            textStyle={{
-              fontFamily: 'Inter_700Bold',
-              color: '#4EA8DE',
-              textDecorationLine: 'none',
-            }}
-            style={{
-              marginLeft: 24,
-              marginTop: 37,
-              marginRight: 24,
-              marginBottom: 36,
-            }}
-            onPress={(isChecked: boolean) => {
-              isChecked ? navigation.navigate('Task') : false;
-            }}
-          />
+        <ButtonWrapper
+          onPress={() => {
+            navigation.navigate('Task', { done: false });
+          }}
+        >
+          <CheckBox text="Em Aberto" disabled />
           <ContactorBox>
-            <Counter>{todoList.length}</Counter>
+            <Counter>{todoList.filter(item => !item.done).length}</Counter>
           </ContactorBox>
-        </OpenTask>
-        <TaskCompleted>
-          <BouncyCheckbox
-            fillColor="#5E60CE"
-            unfillColor="#262626"
-            text="Concluídas"
-            size={24}
-            textStyle={{
-              fontFamily: 'Inter_700Bold',
-              color: '#5E60CE',
-              textDecorationLine: 'none',
-            }}
-            style={{
-              marginLeft: 24,
-              marginTop: 37,
-              marginRight: 18,
-              marginBottom: 36,
-            }}
-            onPress={(isChecked: boolean) => {
-              isChecked ? navigation.navigate('TaskCompleted') : false;
-            }}
-          />
+        </ButtonWrapper>
+        <ButtonWrapper
+          onPress={() => {
+            navigation.navigate('Task', { done: true });
+          }}
+        >
+          <CheckBox text="Concluídas" isChecked disabled />
           <ContactorBox>
-            <Counter>{todoList.length}</Counter>
+            <Counter>{todoList.filter(item => item.done).length}</Counter>
           </ContactorBox>
-        </TaskCompleted>
+        </ButtonWrapper>
       </TaskBox>
     </Container>
   );
